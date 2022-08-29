@@ -23,7 +23,7 @@ let restartBackoffIdx = 0;
 const restartBackoff = [0, 30, 60, 300]; // in seconds
 
 let execArgv = new Array();
-if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push('--inspect=0.0.0.0:' + ( process.debugPort + 2 ))
+if ( process.env.MAILTRAIN_DEBUG == 'true' ) execArgv.push('--inspect=0.0.0.0:' + ( process.debugPort + 2 ))
 
 
 setInterval(() => {

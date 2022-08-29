@@ -10,7 +10,7 @@ let messageTid = 0;
 let executorProcess;
 
 let execArgv = new Array();
-if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push('--inspect=0.0.0.0:' + ( process.debugPort + 1 ))
+if ( process.env.MAILTRAIN_DEBUG == 'true' ) execArgv.push('--inspect=0.0.0.0:' + ( process.debugPort + 1 ))
 
 function spawn(callback) {
     log.verbose('Executor', 'Spawning executor process');

@@ -12,7 +12,7 @@ let messageTid = 0;
 let senderProcess;
 
 let execArgv = new Array();
-if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push( '--inspect=0.0.0.0:0' )
+if ( process.env.MAILTRAIN_DEBUG == 'true' ) execArgv.push( '--inspect=0.0.0.0:0' )
 
 
 
