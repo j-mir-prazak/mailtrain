@@ -9,12 +9,17 @@ const requestCallbacks = {};
 let messageTid = 0;
 let executorProcess;
 
+let execArgv = new Array();
+if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push('--inspect=0.0.0.0:' + ( process.debugPort + 1 ))
+
 function spawn(callback) {
     log.verbose('Executor', 'Spawning executor process');
 
     executorProcess = fork(path.join(__dirname, '..', 'services', 'executor.js'), [], {
         cwd: path.join(__dirname, '..'),
-        env: {NODE_ENV: process.env.NODE_ENV}
+        env: {NODE_ENV: process.env.NODE_ENV},
+        execArgv: execArgv
+        
     });
 
     executorProcess.on('message', msg => {
