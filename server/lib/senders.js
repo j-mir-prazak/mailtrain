@@ -11,6 +11,11 @@ const bluebird = require('bluebird');
 let messageTid = 0;
 let senderProcess;
 
+let execArgv = new Array();
+if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push( '--inspect=0.0.0.0:0' )
+
+
+
 function spawn(callback) {
     log.verbose('Senders', 'Spawning master sender process');
 
@@ -21,7 +26,8 @@ function spawn(callback) {
             cwd: path.join(__dirname, '..'),
             env: {
                 NODE_ENV: process.env.NODE_ENV,
-                BUILTIN_ZONE_MTA_PASSWORD: builtinZoneMta.getPassword()
+                BUILTIN_ZONE_MTA_PASSWORD: builtinZoneMta.getPassword(),
+                execArgv: execArgv
             }
         });
 

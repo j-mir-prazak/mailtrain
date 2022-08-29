@@ -11,12 +11,17 @@ const {getPublicUrl} = require('./urls');
 let messageTid = 0;
 let feedcheckProcess;
 
+let execArgv = new Array();
+if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push( '--inspect=0.0.0.0:0' )
+
+
 function spawn(callback) {
     log.verbose('Feed', 'Spawning feedcheck process');
 
     feedcheckProcess = fork(path.join(__dirname, '..', 'services', 'feedcheck.js'), [], {
         cwd: path.join(__dirname, '..'),
-        env: {NODE_ENV: process.env.NODE_ENV}
+        env: {NODE_ENV: process.env.NODE_ENV},
+        execArgv: execArgv
     });
 
     feedcheckProcess.on('message', msg => {

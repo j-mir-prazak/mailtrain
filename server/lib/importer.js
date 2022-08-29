@@ -12,6 +12,10 @@ const bluebird = require('bluebird');
 let messageTid = 0;
 let importerProcess;
 
+let execArgv = new Array();
+if ( process.env.MAILTRAIN_DEBUG == true ) execArgv.push('--inspect=0.0.0.0:' + ( process.debugPort + 3 ))
+
+
 function spawn(callback) {
     log.verbose('Importer', 'Spawning importer process');
 
@@ -34,7 +38,8 @@ function spawn(callback) {
     }).then(() => {
         importerProcess = fork(path.join(__dirname, '..', 'services', 'importer.js'), [], {
             cwd: path.join(__dirname, '..'),
-            env: {NODE_ENV: process.env.NODE_ENV}
+            env: {NODE_ENV: process.env.NODE_ENV},
+            execArgv: execArgv
         });
 
         importerProcess.on('message', msg => {
