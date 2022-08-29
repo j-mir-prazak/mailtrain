@@ -220,4 +220,8 @@ fi
 
 NODE_ENV=production node setup/docker-entrypoint-db-setup.js "$ADMIN_PASSWORD" "$ADMIN_ACCESS_TOKEN"
 
-NODE_ENV=production node index.js
+if [[ $MAILTRAIN_DEBUG == "true" ]]; then
+  NODE_ENV=production node --inspect index.js
+else
+   NODE_ENV=production node index.js
+fi
