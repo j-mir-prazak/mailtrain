@@ -222,7 +222,7 @@ NODE_ENV=production node setup/docker-entrypoint-db-setup.js "$ADMIN_PASSWORD" "
 
 if [[ $MAILTRAIN_DEBUG == "true" ]]; then
   echo "DEBUGGING."
-  NODE_ENV=production node --inspect-brk index.js
+  NODE_ENV=production node --inspect-brk=0.0.0.0:9229 index.js
 else
    NODE_ENV=production node index.js
 fi
