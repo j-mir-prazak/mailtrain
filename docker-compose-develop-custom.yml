@@ -22,7 +22,9 @@ services:
     - mongo-data:/data/db
 
   mailtrain:
-    image: mailtrain/mailtrain:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-Develop
     environment:
     - WWW_PROXY=true
     - URL_BASE_TRUSTED=https://mailtrain.sherman-mccoy.duckdns.org
@@ -33,12 +35,14 @@ services:
     - "3000:3000"
     - "3003:3003"
     - "3004:3004"
+    - "9229:9229"
+    - "9230:9230"
+    - "9231:9231"
+    - "9236:9236"
     volumes:
-    - mailtrain-files:/app/server/files
+    - ./:/app
 
 volumes:
   mysql-data:
   redis-data:
   mongo-data:
-  mailtrain-files:
-

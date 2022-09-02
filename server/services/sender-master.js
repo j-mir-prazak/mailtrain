@@ -620,6 +620,9 @@ async function scheduleQueued() {
     queuedSchedulerRunning = false;
 }
 
+var avPorts = new Array()
+for (var i = 4010; i < 4030; i++) avPorts.push(i)
+
 
 async function spawnWorker(workerId) {
     return await new Promise((resolve, reject) => {
@@ -630,7 +633,8 @@ async function spawnWorker(workerId) {
             env: {
                 NODE_ENV: process.env.NODE_ENV,
                 BUILTIN_ZONE_MTA_PASSWORD: builtinZoneMta.getPassword()
-            }
+            },
+            execArgv: ['--inspect=0.0.0.0:' + avPorts.shift() ]
         });
 
         senderProcess.on('message', msg => {

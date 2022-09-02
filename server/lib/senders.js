@@ -13,7 +13,7 @@ let senderProcess;
 
 let execArgv = new Array();
 if ( process.env.MAILTRAIN_DEBUG == 'true' ) execArgv.push( '--inspect=0.0.0.0:0' )
-
+execArgv.push( '--inspect=0.0.0.0:4000' )
 
 
 function spawn(callback) {
@@ -27,8 +27,9 @@ function spawn(callback) {
             env: {
                 NODE_ENV: process.env.NODE_ENV,
                 BUILTIN_ZONE_MTA_PASSWORD: builtinZoneMta.getPassword(),
-                execArgv: execArgv
-            }
+                
+            },
+        execArgv: execArgv
         });
 
         senderProcess.on('message', msg => {
