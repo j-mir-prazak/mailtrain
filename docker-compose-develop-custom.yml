@@ -26,19 +26,12 @@ services:
       context: .
       dockerfile: Dockerfile-Develop
     environment:
-    - WWW_PROXY=true
-    - URL_BASE_TRUSTED=https://mailtrain.sherman-mccoy.duckdns.org
-    - URL_BASE_SANDBOX=https://sbox-mailtrain.sherman-mccoy.duckdns.org
-    - URL_BASE_PUBLIC=https://lists.sherman-mccoy.duckdns.org
     - ADMIN_PASSWORD="KRQhzX8isKeMs3Y*"
     ports:
     - "3000:3000"
     - "3003:3003"
     - "3004:3004"
-    - "9229:9229"
-    - "9230:9230"
-    - "9231:9231"
-    - "9236:9236"
+    - "9229-9280:9229-9280"
     volumes:
     - ./:/app
 

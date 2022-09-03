@@ -689,6 +689,8 @@ async function init() {
         spawnWorkerFutures.push(spawnWorker(workerId));
     }
 
+
+
     await Promise.all(spawnWorkerFutures);
 
     process.on('message', msg => {

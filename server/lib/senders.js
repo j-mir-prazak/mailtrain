@@ -11,6 +11,7 @@ const bluebird = require('bluebird');
 let messageTid = 0;
 let senderProcess;
 
+
 function spawn(callback) {
     log.verbose('Senders', 'Spawning master sender process');
 
@@ -24,6 +25,7 @@ function spawn(callback) {
                 BUILTIN_ZONE_MTA_PASSWORD: builtinZoneMta.getPassword()
             }
         });
+
 
         senderProcess.on('message', msg => {
             if (msg) {

@@ -219,5 +219,3 @@ if [ "$WITH_LDAP" = "true" ]; then
 fi
 
 NODE_ENV=production node setup/docker-entrypoint-db-setup.js "$ADMIN_PASSWORD" "$ADMIN_ACCESS_TOKEN"
-
-NODE_ENV=production node index.js
