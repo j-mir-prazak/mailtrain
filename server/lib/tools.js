@@ -172,7 +172,7 @@ function _formatTemplateSimple(source, mergeTags, isHTML) {
 
         const containsHTML = /<[a-z][\s\S]*>/.test(value);
         return isHTML ? he.encode((containsHTML ? value : value.replace(/(?:\r\n|\r|\n)/g, '<br/>')), {
-            useNamedReferences: true,
+            useNamedReferences: false, //set to true breaks special characters like ěščřž in some email clients - maybe flag would be middle ground?
             allowUnsafeSymbols: true
         }) : (containsHTML ? htmlToText.fromString(value) : value);
     };
